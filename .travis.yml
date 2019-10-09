@@ -32,29 +32,44 @@ jobs:
           paths:
             - foo.txt
             - commit_id.txt
-    - stage: use_cache
+    - stage: nix_use_cache
       workspaces:
         use: 
         name: ws1
+        os: linux
+        dist: bionic
         script:
           - cat foo.txt || true
           - cat commit_id.txt || true
           - export GIT_COMMIT="$(cat commit_id.txt || true)"
+          - sh test.sh
+    - stage: osx_use_cache
+      workspaces:
+        use: 
+        name: ws1
+        os: osx
+        osx_image: xcode10.1
+        script:
+          - cat foo.txt || true
+          - cat commit_id.txt || true
+          - export GIT_COMMIT="$(cat commit_id.txt || true)"
+          - sh test.sh
 
-matrix:
-  workspaces:
-    use: 
-    name: ws1
-  include:
-    - os: linux
-      dist: bionic
-      script:
-        #- openssl version
-        #- shellcheck --version
-        #- bash -c 'export SHELLCHECK_OPTS="-S warning -e SC2006"; shopt -s globstar; shellcheck **/*.sh easyrsa3/easyrsa'
-        - sh test.sh
-    - os: osx
-      osx_image: xcode10.1
-      script:
-        #- openssl version
-        - sh test.sh
+
+#matrix:
+#  workspaces:
+#    use: 
+#    name: ws1
+#  include:
+#    - os: linux
+#      dist: bionic
+#      script:
+#        #- openssl version
+#        #- shellcheck --version
+#        #- bash -c 'export SHELLCHECK_OPTS="-S warning -e SC2006"; shopt -s globstar; shellcheck **/*.sh easyrsa3/easyrsa'
+#        - sh test.sh
+#    - os: osx
+#      osx_image: xcode10.1
+#      script:
+#        #- openssl version
+#        - sh test.sh
