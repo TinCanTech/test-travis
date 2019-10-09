@@ -18,7 +18,7 @@ jobs:
         - export CURL_HEADER="User-Agent":" $GIT_USER"
         - echo "CURL_HEADER.. $CURL_HEADER"
         #
-        - curl -O -v -s -f -H "$CURL_HEADER" "$CURL_TARGET"
+        - curl -O -v -s -f -H \'"$CURL_HEADER"\' "$CURL_TARGET"
         #
         - cat master || exit 1
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
@@ -30,11 +30,11 @@ jobs:
         create:
           name: ws1
           paths:
-            #- foo.txt
+            - foo.txt
             - commit_id.txt
     - stage: use_cache
       workspaces:
         use: ws1
       script:
-        #- cat foo.txt || true
+        - cat foo.txt || true
         - cat commit_id.txt || true
