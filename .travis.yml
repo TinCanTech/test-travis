@@ -11,7 +11,7 @@ jobs:
       script:
         - echo "foo" > foo.txt
         - export GIT_USER="tincantech"
-        - bash -c 'export CURL_HDUA="-H 'User-Agent: tincantech'"'
+        - export CURL_HDUA="-H 'User-Agent:\ tincantech'"
         - export GIT_REPO="test-easyrsa-unit-tests"
         - export GIT_API_CMD="git/refs/heads/master"
         - export GIT_API_URL="https://api.github.com/repos"
