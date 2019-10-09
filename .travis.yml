@@ -9,9 +9,9 @@ jobs:
   include:
     - stage: warm_cache
       script:
-        - echo "foo" > foo.txt
+        #- echo "foo" > foo.txt
         - export GIT_USER="tincantech"
-        - export CURL_HUA="User-Agent:$GIT_USER"
+        #- export CURL_HUA="User-Agent:$GIT_USER"
         #- echo '\"User-Agent\:\ tincantech\"' > curl_hua.txt
         #- cat curl_hua.txt
         - export GIT_REPO="test-easyrsa-unit-tests"
@@ -19,21 +19,24 @@ jobs:
         - export GIT_API_URL="https://api.github.com/repos"
         - export CURL_TARGET="$GIT_API_URL/$GIT_USER/$GIT_REPO/$GIT_API_CMD"
         #- curl -O -v -s -f -H @curl_hua.txt "$CURL_TARGET"
-        - curl -O -v -s -f -H "$CURL_HUA" "$CURL_TARGET"
+        - set -x
+        - curl -O -v -s -f -H "User-Agent:$GIT_USER" "$CURL_TARGET"
+        - set +x
+        - cat master || exit 1
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
         - cat temp1 | grep 'sha:' > temp2
         - cat temp2 | awk '{print $2}' > commit_id.txt
-        - cat commit_id.txt || true
+        - cat commit_id.txt || exit 1
         #- rm -f master temp1 temp2
       workspaces:
         create:
           name: ws1
           paths:
-            - foo.txt
+            #- foo.txt
             - commit_id.txt
     - stage: use_cache
       workspaces:
         use: ws1
       script:
-        - cat foo.txt || true
+        #- cat foo.txt || true
         - cat commit_id.txt || true
