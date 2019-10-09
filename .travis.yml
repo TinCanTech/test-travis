@@ -19,7 +19,8 @@ jobs:
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
         - cat temp1 | grep 'sha:' > temp2
         - cat temp2 | awk '{print $2}' > commit_id.txt
-        - rm -f master temp1 temp2
+        - cat commit_id.txt || true
+        #- rm -f master temp1 temp2
       workspaces:
         create:
           name: ws1
