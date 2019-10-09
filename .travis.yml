@@ -11,7 +11,7 @@ jobs:
       script:
         - echo "foo" > foo.txt
         - export GIT_USER="tincantech"
-        - export CURL_HUA="User-Agent:\ $GIT_USER"
+        - export CURL_HUA="User-Agent:$GIT_USER"
         #- echo '\"User-Agent\:\ tincantech\"' > curl_hua.txt
         #- cat curl_hua.txt
         - export GIT_REPO="test-easyrsa-unit-tests"
