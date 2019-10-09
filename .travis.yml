@@ -15,7 +15,7 @@ jobs:
         - export GIT_API_CMD="git/refs/heads/master"
         - export GIT_API_URL="https://api.github.com/repos"
         - export CURL_TARGET="$GIT_API_URL/$GIT_USER/$GIT_REPO/$GIT_API_CMD"
-        - export CURL_HEADER="'User-Agent":" $GIT_USER'"
+        - export CURL_HEADER='"User-Agent":" $GIT_USER"'
         - echo "CURL_HEADER.. $CURL_HEADER"
         #
         - curl -O -v -s -f -H "$CURL_HEADER" "$CURL_TARGET"
