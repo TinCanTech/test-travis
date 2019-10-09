@@ -9,18 +9,18 @@ jobs:
   include:
     - stage: warm_cache
       script:
-        #- echo "foo" > foo.txt
+        - echo "foo" > foo.txt
+        - echo ":\ " > dumpster-fire.txt
         - export GIT_USER="tincantech"
-        #- export CURL_HUA="-H \'User-Agent:\ $GIT_USER\'"
-        #- echo '\"User-Agent\:\ tincantech\"' > curl_hua.txt
-        #- cat curl_hua.txt
         - export GIT_REPO="test-easyrsa-unit-tests"
         - export GIT_API_CMD="git/refs/heads/master"
         - export GIT_API_URL="https://api.github.com/repos"
         - export CURL_TARGET="$GIT_API_URL/$GIT_USER/$GIT_REPO/$GIT_API_CMD"
+        #
         #- curl -O -v -s -f -H @curl_hua.txt "$CURL_TARGET"
+        #
         #- set -x
-        - bash -c curl -O -v -s -f -H 'User-Agent: ticantech' "$CURL_TARGET"
+        - curl -O -v -s -f -H "'User-Agent":" ticantech'" "$CURL_TARGET"
         #- set +x
         - cat master || exit 1
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
