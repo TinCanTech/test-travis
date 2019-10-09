@@ -20,7 +20,7 @@ jobs:
         - export CURL_TARGET="$GIT_API_URL/$GIT_USER/$GIT_REPO/$GIT_API_CMD"
         #- curl -O -v -s -f -H @curl_hua.txt "$CURL_TARGET"
         - set -x
-        - curl -O -v -s -f -H "User-Agent:$GIT_USER" "$CURL_TARGET"
+        - curl -O -v -s -f -H \"User-Agent:\ $GIT_USER\" "$CURL_TARGET"
         - set +x
         - cat master || exit 1
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
