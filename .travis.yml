@@ -11,7 +11,7 @@ jobs:
       script:
         #- echo "foo" > foo.txt
         - export GIT_USER="tincantech"
-        - export CURL_HUA="\'User-Agent:\ $GIT_USER\'"
+        - export CURL_HUA="-H \'User-Agent:\ $GIT_USER\'"
         #- echo '\"User-Agent\:\ tincantech\"' > curl_hua.txt
         #- cat curl_hua.txt
         - export GIT_REPO="test-easyrsa-unit-tests"
@@ -20,7 +20,7 @@ jobs:
         - export CURL_TARGET="$GIT_API_URL/$GIT_USER/$GIT_REPO/$GIT_API_CMD"
         #- curl -O -v -s -f -H @curl_hua.txt "$CURL_TARGET"
         - set -x
-        - curl -O -v -s -f -H "$CURL_HUA" "$CURL_TARGET"
+        - curl -O -v -s -f $CURL_HUA "$CURL_TARGET"
         - set +x
         - cat master || exit 1
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
