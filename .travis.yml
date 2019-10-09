@@ -34,7 +34,8 @@ jobs:
             - commit_id.txt
     - stage: use_cache
       workspaces:
-        use: ws1
+        use: 
+        name: ws1
         script:
           - cat foo.txt || true
           - cat commit_id.txt || true
@@ -42,7 +43,8 @@ jobs:
 
 matrix:
   workspaces:
-    use: ws1
+    use: 
+    name: ws1
   include:
     - os: linux
       dist: bionic
