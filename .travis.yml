@@ -15,8 +15,9 @@ jobs:
         - export GIT_API_CMD="git/refs/heads/master"
         - export GIT_API_URL="https://api.github.com/repos"
         - export CURL_TARGET="$GIT_API_URL/$GIT_USER/$GIT_REPO/$GIT_API_CMD"
+        - export CURL_HEADER=""User-Agent":" $GIT_USER""
         #
-        - curl -O -v -s -f -H "User-Agent":" $GIT_USER" "$CURL_TARGET"
+        - curl -O -v -s -f -H "$CURL_HEADER" "$CURL_TARGET"
         #
         - cat master || exit 1
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
