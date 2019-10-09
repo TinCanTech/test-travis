@@ -18,7 +18,7 @@ jobs:
         - curl -O -v -s -f "$CURL_TARGET"
         - sed -e "s\`,\`\n\`g" -e "s\`\"\`\`g" master > temp1
         - cat temp1 | grep 'sha:' > temp2
-        - cat temp2 | awk '{print $2}')"}" > commit_id.txt
+        - cat temp2 | awk '{print $2}' > commit_id.txt
         - rm -f master temp1 temp2
       workspaces:
         create:
