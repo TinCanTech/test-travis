@@ -32,23 +32,27 @@ jobs:
           paths:
             - foo.txt
             - commit_id.txt
+
     - stage: nix_use_cache
       workspaces:
-        use: 
-        name: ws1
-        os: linux
-        dist: bionic
+        use: ws1
+      os: linux
+      dist: bionic
+      nix_use_cache:
+        provider: script
         script:
           - cat foo.txt || true
           - cat commit_id.txt || true
           - export GIT_COMMIT="$(cat commit_id.txt || true)"
           - sh test.sh
+
     - stage: osx_use_cache
       workspaces:
-        use: 
-        name: ws1
-        os: osx
-        osx_image: xcode10.1
+        use: ws1
+      os: osx
+      osx_image: xcode10.1
+      osx_use_cache:
+        provider: script
         script:
           - cat foo.txt || true
           - cat commit_id.txt || true
