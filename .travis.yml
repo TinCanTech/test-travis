@@ -38,28 +38,24 @@ jobs:
         use: ws1
       os: linux
       dist: bionic
-      language: minimal
-      nix_use_cache:
-        provider: script1
-        script1:
-          - cat foo.txt || true
-          - cat commit_id.txt || true
-          - export GIT_COMMIT="$(cat commit_id.txt || true)"
-          - sh test.sh
+      language: bash
+      script1:
+        - cat foo.txt || true
+        - cat commit_id.txt || true
+        - export GIT_COMMIT="$(cat commit_id.txt || true)"
+        - sh test.sh
 
     - stage: osx_use_cache
       workspaces:
         use: ws1
       os: osx
       osx_image: xcode10.1
-      language: minimal
-      osx_use_cache:
-        provider: script2
-        script2:
-          - cat foo.txt || true
-          - cat commit_id.txt || true
-          - export GIT_COMMIT="$(cat commit_id.txt || true)"
-          - sh test.sh
+      language: bash
+      script:
+        - cat foo.txt || true
+        - cat commit_id.txt || true
+        - export GIT_COMMIT="$(cat commit_id.txt || true)"
+        - sh test.sh
 
 
 #matrix:
