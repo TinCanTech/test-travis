@@ -39,7 +39,7 @@ jobs:
       os: linux
       dist: bionic
       language: bash
-      script1:
+      script:
         - cat foo.txt || true
         - cat commit_id.txt || true
         - export GIT_COMMIT="$(cat commit_id.txt || true)"
